@@ -60,10 +60,12 @@ echo commit exit=%errorlevel% >> "%LOG%"
 
 "%GIT_EXE%" log --oneline -5 >> "%LOG%" 2>&1
 
-if exist .git\refs\remotes (
-  "%GIT_EXE%" push >> "%LOG%" 2>&1
-  echo push exit=%errorlevel% >> "%LOG%"
-)
+rem --- push only when a remote exists; exit code logged accurately ---
+"%GIT_EXE%" remote get-url origin >nul 2>&1
+if errorlevel 1 goto skip_push
+"%GIT_EXE%" push >> "%LOG%" 2>&1
+echo push exit=%errorlevel% >> "%LOG%"
+:skip_push
 
 echo === RESULT: OK, see git-check.log === >> "%LOG%"
 type "%LOG%"
