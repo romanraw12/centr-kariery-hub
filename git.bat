@@ -60,13 +60,21 @@ echo commit exit=%errorlevel% >> "%LOG%"
 
 "%GIT_EXE%" log --oneline -5 >> "%LOG%" 2>&1
 
-rem --- push only when a remote exists; exit code logged accurately ---
+rem --- push only when a remote exists; fail loudly if push fails ---
 "%GIT_EXE%" remote get-url origin >nul 2>&1
 if errorlevel 1 goto skip_push
-"%GIT_EXE%" push >> "%LOG%" 2>&1
-echo push exit=%errorlevel% >> "%LOG%"
-:skip_push
+"%GIT_EXE%" push -u origin HEAD >> "%LOG%" 2>&1
+if errorlevel 1 goto push_failed
+echo push exit=0 >> "%LOG%"
 
+:skip_push
 echo === RESULT: OK, see git-check.log === >> "%LOG%"
 type "%LOG%"
 pause
+exit /b 0
+
+:push_failed
+echo === RESULT: FAIL [push] - see git-check.log === >> "%LOG%"
+type "%LOG%"
+pause
+exit /b 1
