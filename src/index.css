@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/* Тема переключается классом .dark на <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Поверхности и текст */
+  --surface: 150 24% 97%;
+  --card: 0 0% 100%;
+  --ink: 160 34% 10%;
+  --ink-soft: 160 12% 40%;
+  --line: 150 16% 86%;
+  --line-strong: 150 14% 74%;
+
+  /* Бренд «royal»: тёмно-зелёный фон + золото.
+     Имена переменных исторические (navy/azure/amber) и закреплены за
+     готовыми утилитами разметки: bg-navy — тёмно-зелёный, bg-azure —
+     изумрудный (действия), bg-amber — золото (акценты, числа метрик). */
+  --navy: 158 44% 14%;
+  --navy-deep: 160 52% 8%;
+  --azure: 156 54% 32%;
+  --azure-deep: 157 56% 24%;
+  --azure-soft: 148 42% 94%;
+  --amber: 43 78% 53%;
+  --amber-soft: 45 76% 93%;
+
+  --radius: 4px;
+  --radius-card: 18px;
+  --radius-control: 9999px;
+}
+
+.dark {
+  /* Тёмная тема — монохром: чёрный фон, белый текст, белые акценты.
+     Те же токены, поэтому разметка не меняется. */
+  --surface: 0 0% 4%;
+  --card: 0 0% 7%;
+  --ink: 0 0% 96%;
+  --ink-soft: 0 0% 68%;
+  --line: 0 0% 16%;
+  --line-strong: 0 0% 30%;
+
+  --navy: 0 0% 0%;
+  --navy-deep: 0 0% 0%;
+  --azure: 0 0% 100%;
+  --azure-deep: 0 0% 88%;
+  --azure-soft: 0 0% 12%;
+  --amber: 0 0% 100%;
+  --amber-soft: 0 0% 12%;
+
+  --radius-card: 20px;
+}
+
+@theme inline {
+  --color-surface: hsl(var(--surface));
+  --color-card: hsl(var(--card));
+  --color-ink: hsl(var(--ink));
+  --color-ink-soft: hsl(var(--ink-soft));
+  --color-line: hsl(var(--line));
+  --color-line-strong: hsl(var(--line-strong));
+
+  --color-navy: hsl(var(--navy));
+  --color-navy-deep: hsl(var(--navy-deep));
+  --color-azure: hsl(var(--azure));
+  --color-azure-deep: hsl(var(--azure-deep));
+  --color-azure-soft: hsl(var(--azure-soft));
+  --color-amber: hsl(var(--amber));
+  --color-amber-soft: hsl(var(--amber-soft));
+
+  --font-display: Georgia, "Times New Roman", "Noto Serif", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: var(--radius-card);
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7.5rem;
+  }
+
+  body {
+    background-color: hsl(var(--surface));
+    color: hsl(var(--ink));
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tailwind preflight обнуляет скругления, из-за чего кнопки и поля
+     выходят угловатыми. Возвращаем мягкие формы всем элементам управления;
+     точечные утилиты rounded-* по-прежнему имеют приоритет. */
+  button,
+  [role='button'],
+  input,
+  select {
+    border-radius: var(--radius-control);
+  }
+
+  textarea {
+    border-radius: 14px;
+  }
+
+  /* Формы наследуют цвет текста и поля — иначе на тёмной теме ввод «светится». */
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  ::selection {
+    background: hsl(var(--azure) / 0.2);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--azure));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Карточка: мягкое скругление, тонкая рамка и очень лёгкая тень —
+     «дорогая» фактура вместо строгих прямоугольников. */
+  .panel {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--line));
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 2px hsl(var(--navy) / 0.05);
+  }
+
+  /* Заголовок секции с янтарной чертой слева. */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .section-title::before {
+    content: "";
+    display: block;
+    width: 3px;
+    height: 1.1em;
+    border-radius: 9999px;
+    background: hsl(var(--amber));
+    transform: translateY(0.15em);
+  }
+
+  /* Мелкая служебная подпись. */
+  .caption {
+    font-size: 12.5px;
+    color: hsl(var(--ink-soft));
+    letter-spacing: 0.02em;
+  }
+
+  /* Крупное число метрики. */
+  .metric {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  /* Пункт навигации — мягкая «таблетка»: активный заливается тёмно-зелёным,
+     счётчик внутри — золотой. Никаких углов и подчёркиваний. */
+  .nav-link {
+    margin: 0.45rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-control);
+    font-size: 14.5px;
+    font-weight: 600;
+    color: hsl(var(--ink-soft));
+    white-space: nowrap;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .nav-link:hover {
+    background: hsl(var(--azure-soft));
+    color: hsl(var(--ink));
+  }
+
+  .nav-link[aria-current='true'] {
+    background: hsl(var(--navy));
+    color: hsl(var(--card));
+  }
+
+  .nav-link[aria-current='true'] .nav-count {
+    color: hsl(var(--amber));
+  }
+}
+
+@layer utilities {
+  /* Горизонтальная лента навигации без ползунка — как на узловых порталах. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* --- Боковое меню-кружок --- */
+
+  /* Кружок: круглая плавающая кнопка с мягкой тенью. В основной теме —
+     тёмно-зелёный круг с золотой шестерёнкой, в тёмной — белый на чёрном. */
+  .orb {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    background: hsl(var(--navy));
+    color: hsl(var(--amber));
+    box-shadow: 0 10px 28px hsl(var(--navy) / 0.35);
+    transition:
+      transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .orb:hover {
+    transform: scale(1.06);
+    box-shadow: 0 14px 34px hsl(var(--navy) / 0.42);
+  }
+
+  .dark .orb {
+    background: hsl(var(--card));
+    color: hsl(var(--ink));
+    box-shadow: 0 10px 28px hsl(0 0% 0% / 0.65);
+  }
+
+  /* Панель разделов раскрывается «каплей»: круг растёт от центра кружка. */
+  .menu-drop {
+    clip-path: circle(0% at calc(100% - 3.25rem) 50%);
+    transition: clip-path 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .menu-drop[data-open='true'] {
+    clip-path: circle(150% at calc(100% - 3.25rem) 50%);
+  }
+
+  /* Пункты выезжают внутрь каскадом — с лёгким сдвигом и задержкой. */
+  .menu-item {
+    opacity: 0;
+    transform: translateX(16px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .menu-drop[data-open='true'] .menu-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

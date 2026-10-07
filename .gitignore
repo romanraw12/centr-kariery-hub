@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+build-result.txt
+*.log
+node-v24.21.0-win-x64/
+diag*.txt
