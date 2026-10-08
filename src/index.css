@@ -267,3 +267,14 @@
   background: hsl(203 100% 93%);
   color: hsl(0 0% 10%);
 }
+
+/* Выделенный раздел в тёмной теме — чёрная плашка с белыми буквами,
+   иначе тёмный текст сливался с тёмной подложкой выделения. */
+.dark .menu-drop .menu-item[aria-current='page'] {
+  background: hsl(0 0% 0%);
+  color: hsl(0 0% 100%);
+}
+
+.dark .menu-drop .menu-item[aria-current='page'] .text-ink-soft {
+  color: hsl(0 0% 70%);
+}
