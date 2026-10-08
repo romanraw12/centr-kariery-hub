@@ -76,7 +76,6 @@ export function ResumeWizard() {
   return (
     <section id="resume" className="border-y border-line bg-card">
       <div className="mx-auto max-w-4xl px-4 py-14 md:py-20">
-        <h2 className="section-title">Конструктор резюме</h2>
         <p className="mt-3 text-sm text-ink-soft">
           5 шагов · вопросы под вашу академию · выгрузка в Word
         </p>

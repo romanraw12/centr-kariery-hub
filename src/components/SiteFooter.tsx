@@ -38,7 +38,13 @@ const COLUMNS = [
   },
 ]
 
-export function SiteFooter({ onCallback }: { onCallback: () => void }) {
+export function SiteFooter({
+  onCallback,
+  onNavigate,
+}: {
+  onCallback: () => void
+  onNavigate: (id: string) => void
+}) {
   const year = new Date().getFullYear()
 
   const go = (id: string) => {
@@ -46,7 +52,7 @@ export function SiteFooter({ onCallback }: { onCallback: () => void }) {
       onCallback()
       return
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    onNavigate(id === 'about' ? 'contacts' : id)
   }
 
   return (

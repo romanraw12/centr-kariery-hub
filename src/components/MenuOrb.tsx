@@ -6,7 +6,13 @@ import { useTheme } from '../theme'
 /* Боковое меню-кружок. В основной (голубой с золотом) теме — круглая
    кнопка с шестерёнкой; в тёмной — «капля» из белого кружка: панель белая,
    содержимое тёмное. */
-export function MenuOrb() {
+export function MenuOrb({
+  current,
+  onNavigate,
+}: {
+  current: string
+  onNavigate: (id: string) => void
+}) {
   const [open, setOpen] = useState(false)
   const { theme } = useTheme()
 
@@ -19,11 +25,10 @@ export function MenuOrb() {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  /* Клик по разделу открывает его отдельную «страницу». */
   const go = (id: string) => {
     setOpen(false)
-    window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 260)
+    onNavigate(id)
   }
 
   return (
@@ -54,8 +59,11 @@ export function MenuOrb() {
               <button
                 type="button"
                 onClick={() => go(item.id)}
+                aria-current={current === item.id ? 'page' : undefined}
                 style={{ transitionDelay: `${index * 28}ms` }}
-                className="menu-item flex w-full items-center justify-between rounded-control px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-azure-soft"
+                className={`menu-item flex w-full items-center justify-between rounded-control px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-azure-soft ${
+                  current === item.id ? 'bg-azure-soft font-semibold' : ''
+                }`}
               >
                 <span>{item.label}</span>
                 <span className="text-xs text-ink-soft">→</span>

@@ -71,7 +71,6 @@ export function VacancySection({
   return (
     <section id="vacancies" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 className="section-title">Вакансии</h2>
         <p className="caption">Найдено: {filtered.length} из {VACANCIES.length}</p>
       </div>
       <p className="mt-3 max-w-3xl text-sm text-ink-soft">

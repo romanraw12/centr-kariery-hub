@@ -7,7 +7,6 @@ const BAR_WIDTHS = ['38%', '62%', '92%']
 export function CareerTrack() {
   return (
     <section id="career-track" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-      <h2 className="section-title">Карьерный трек студента</h2>
       <p className="mt-3 max-w-3xl text-sm text-ink-soft">
         Каждая ступень образования открывает следующий уровень дохода. Вилки ориентировочные,
         Ростов-на-Дону, 2026.
@@ -50,7 +49,6 @@ export function TargetEducation() {
   return (
     <section id="target-education" className="border-y border-line bg-card">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-        <h2 className="section-title">Целевое обучение</h2>
         <p className="mt-3 max-w-3xl text-sm text-ink-soft">
           Работодатель-заказчик оплачивает учёбу, выпускник отрабатывает по договору.
         </p>

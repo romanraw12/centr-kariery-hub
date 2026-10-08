@@ -5,7 +5,6 @@ export function AmbassadorSection() {
   return (
     <section id="ambassadors" className="border-y border-line bg-card">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-        <h2 className="section-title">Амбассадоры крупных компаний</h2>
         <p className="mt-3 max-w-3xl text-sm text-ink-soft">
           Амбассадор — студент, который представляет компанию в своём вузе: рассказывает о
           стажировках, ведёт соцсети, собирает митапы и помогает одногруппникам попасть на отбор.

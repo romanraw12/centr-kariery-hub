@@ -4,7 +4,6 @@ import { VACANCIES } from '../data/vacancies'
 export function AnalyticsSection() {
   return (
     <section id="analytics" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-      <h2 className="section-title">Аналитика выпуска</h2>
       <p className="mt-3 max-w-3xl text-sm text-ink-soft">
         Опрос выпускников 2024–2025 годов. Данные обновлены в сентябре 2026 года.
       </p>
@@ -50,7 +49,6 @@ export function NewsSection() {
   return (
     <section id="news" className="border-y border-line bg-card">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-        <h2 className="section-title">Новости центра</h2>
         <ul className="mt-6 divide-y divide-line border-t border-line">
           {NEWS.map((item) => (
             <li key={item.date} className="flex flex-wrap gap-x-6 gap-y-1 py-4">

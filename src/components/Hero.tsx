@@ -8,16 +8,16 @@ export function Hero({
   vacancyCount,
   internshipCount,
   academyCount,
+  onOpenVacancies,
 }: {
   query: string
   onQuery: (value: string) => void
   vacancyCount: number
   internshipCount: number
   academyCount: number
+  onOpenVacancies: () => void
 }) {
-  const goToVacancies = () => {
-    document.getElementById('vacancies')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const goToVacancies = () => onOpenVacancies()
 
   return (
     <section className="bg-navy text-white">

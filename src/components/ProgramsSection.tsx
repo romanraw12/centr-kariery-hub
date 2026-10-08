@@ -7,7 +7,6 @@ export function InternshipSection() {
   return (
     <section id="internships" className="border-y border-line bg-card">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-        <h2 className="section-title">Стажировки и практика</h2>
         <p className="mt-3 max-w-3xl text-sm text-ink-soft">
           Бесплатные программы от работодателей региона: IT, банки, производство, госслужба.
           Наборы идут волнами — точные даты уточняйте в карточке.
@@ -64,7 +63,6 @@ export function InternshipSection() {
 export function AcademiesSection() {
   return (
     <section id="academies" className="mx-auto max-w-6xl px-4 py-14 md:py-20">
-      <h2 className="section-title">Академии</h2>
       <p className="mt-3 max-w-3xl text-sm text-ink-soft">
         Выберите академию — покажем вакансии и места практики по вашим специальностям.
       </p>
