@@ -102,7 +102,7 @@ export default function App() {
             <SectionIndex onOpen={openView} />
           </>
         ) : (
-          <SectionPage id={view} onNavigate={openView}>
+          <SectionPage id={view}>
             {renderSection()}
           </SectionPage>
         )}
