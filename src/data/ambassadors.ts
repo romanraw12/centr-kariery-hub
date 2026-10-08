@@ -15,7 +15,7 @@ export const AMBASSADORS: AmbassadorProgram[] = [
     terms: 'Студент 2 курса и выше, 5–10 часов в неделю. Не оплачивается.',
     selection: 'Заявка → анкета → задание → видеоинтервью. Результаты 16 октября.',
     deadline: '27 сентября',
-    url: 'https://career.yandex.ru/',
+    url: 'https://yandex.ru/yaintern/uteam/',
   },
   {
     id: 'a-02',
@@ -27,7 +27,7 @@ export const AMBASSADORS: AmbassadorProgram[] = [
     gives: 'Обучение, мерч, сообщество амбассадоров по всей стране.',
     terms: 'Студент, активность в соцсетях и вузе.',
     selection: 'Отбор на странице программы амбассаоров.',
-    url: 'https://vk.cc/',
+    url: 'https://education.vk.company/program/ambassadors',
   },
   {
     id: 'a-03',

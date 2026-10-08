@@ -37,7 +37,16 @@ export function AnalyticsSection() {
           ))}
         </ul>
         <p className="mt-4 text-xs text-ink-soft">
-          Источник вакансий: открытое API «Работы России» (trudvsem.ru), подборка от{' '}
+          Источник вакансий: открытое API «Работы России» (
+          <a
+            href="https://trudvsem.ru/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-azure transition-colors hover:underline"
+          >
+            trudvsem.ru
+          </a>
+          ), подборка от{' '}
           {OVERVIEW.updated}. Опрос выпускников — внутренний, Центр карьеры.
         </p>
       </div>
@@ -99,19 +108,41 @@ export function ContactsSection({ onCallback }: { onCallback: () => void }) {
           <dl className="mt-4 space-y-3 text-sm">
             <div>
               <dt className="text-ink-soft">Адрес</dt>
-              <dd>344068, г. Ростов-на-Дону, пр. Михаила Нагибина, 33А/47</dd>
+              <dd>
+                <a
+                  href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%D0%B0%20%D0%9D%D0%B0%D0%B3%D0%B8%D0%B1%D0%B8%D0%BD%D0%B0%2C%2033%D0%90%2F47"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-azure"
+                >
+                  344068, г. Ростов-на-Дону, пр. Михаила Нагибина, 33А/47
+                </a>
+              </dd>
             </div>
             <div>
               <dt className="text-ink-soft">Горячая линия</dt>
-              <dd>8 800 77-55-012 (звонок бесплатный)</dd>
+              <dd>
+                <a href="tel:88007755012" className="transition-colors hover:text-azure">
+                  8 800 77-55-012
+                </a>{' '}
+                (звонок бесплатный)
+              </dd>
             </div>
             <div>
               <dt className="text-ink-soft">Приёмная комиссия</dt>
-              <dd>8 (863) 245-45-65</dd>
+              <dd>
+                <a href="tel:+78632454565" className="transition-colors hover:text-azure">
+                  8 (863) 245-45-65
+                </a>
+              </dd>
             </div>
             <div>
               <dt className="text-ink-soft">Почта</dt>
-              <dd>career@iubip.ru</dd>
+              <dd>
+                <a href="mailto:career@iubip.ru" className="transition-colors hover:text-azure">
+                  career@iubip.ru
+                </a>
+              </dd>
             </div>
             <div>
               <dt className="text-ink-soft">Часы работы</dt>

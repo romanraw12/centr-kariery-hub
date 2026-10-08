@@ -11,8 +11,22 @@ export function SiteHeader({ onCallback }: { onCallback: () => void }) {
       <div className="bg-navy-deep text-white/75">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-1 px-4 py-1.5 text-xs">
           <span>Южный университет (ИУБиП)</span>
-          <span className="hidden sm:inline">Сведения об образовательной организации</span>
-          <span className="ml-auto">Минобрнауки России</span>
+          <a
+            href="https://www.iubip.ru/sveden/"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden transition-colors hover:text-white sm:inline"
+          >
+            Сведения об образовательной организации
+          </a>
+          <a
+            href="https://www.minobrnauki.gov.ru/"
+            target="_blank"
+            rel="noreferrer"
+            className="ml-auto transition-colors hover:text-white"
+          >
+            Минобрнауки России
+          </a>
         </div>
       </div>
 
