@@ -1,5 +1,6 @@
 import { Moon, PhoneCall, Sun } from 'lucide-react'
 import { useTheme } from '../theme'
+import { Logo } from './Logo'
 
 export function SiteHeader({ onCallback }: { onCallback: () => void }) {
   const { theme, toggle } = useTheme()
@@ -19,21 +20,12 @@ export function SiteHeader({ onCallback }: { onCallback: () => void }) {
          мягкие органы управления — без единого острого угла. */}
       <div className="border-b border-line bg-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-3 px-4 py-3">
-          {/* Бренд: логотип крупным планом в скруглённом медальоне. */}
+          {/* Бренд: логотип крупным планом в скруглённом медальоне.
+              Цвет логотипа наследуется от темы: золото — в основной,
+              белый — в тёмной; подложка медальона подстраивается. */}
           <div className="flex items-center gap-4">
-            <span className="relative grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-card border border-line bg-white shadow-sm sm:h-24 sm:w-24 dark:bg-white/95">
-              {/* Запасная марка — если файл логотипа ещё не положили в public. */}
-              <span className="font-display text-2xl font-bold text-navy select-none" aria-hidden="true">
-                ЦК
-              </span>
-              <img
-                src={`${import.meta.env.BASE_URL}logo.png`}
-                alt="Логотип Центра карьеры"
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={(event) => {
-                  event.currentTarget.style.display = 'none'
-                }}
-              />
+            <span className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-card border border-line bg-white p-2.5 shadow-sm sm:h-24 sm:w-24 dark:border-white/15 dark:bg-navy">
+              <Logo className="h-full w-full text-amber" />
             </span>
 
             <div>
