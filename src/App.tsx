@@ -24,10 +24,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface text-ink">
-      <SiteHeader
-        onCallback={openCallback}
-        counts={{ vacancies: VACANCIES.length, internships: INTERNSHIPS.length }}
-      />
+      <SiteHeader onCallback={openCallback} />
 
       <main>
         <Hero

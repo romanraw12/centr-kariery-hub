@@ -11,5 +11,3 @@ export const NAV = [
   { id: 'news', label: 'Новости' },
   { id: 'contacts', label: 'Контакты' },
 ]
-
-export const NAV_IDS = NAV.map((item) => item.id)

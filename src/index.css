@@ -4,23 +4,23 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Поверхности и текст */
-  --surface: 150 24% 97%;
+  /* Поверхности и текст: белые поверхности с голубым подтоном. */
+  --surface: 204 100% 96%;
   --card: 0 0% 100%;
-  --ink: 160 34% 10%;
-  --ink-soft: 160 12% 40%;
-  --line: 150 16% 86%;
-  --line-strong: 150 14% 74%;
+  --ink: 214 75% 10%;
+  --ink-soft: 213 30% 42%;
+  --line: 206 45% 87%;
+  --line-strong: 206 40% 76%;
 
-  /* Бренд «royal»: тёмно-зелёный фон + золото.
+  /* Бренд «голубой + белый»: белые поверхности, голубые фоны и действия.
      Имена переменных исторические (navy/azure/amber) и закреплены за
-     готовыми утилитами разметки: bg-navy — тёмно-зелёный, bg-azure —
-     изумрудный (действия), bg-amber — золото (акценты, числа метрик). */
-  --navy: 158 44% 14%;
-  --navy-deep: 160 52% 8%;
-  --azure: 156 54% 32%;
-  --azure-deep: 157 56% 24%;
-  --azure-soft: 148 42% 94%;
+     готовыми утилитами разметки: bg-navy — глубокий голубой, bg-azure —
+     голубой (действия), bg-amber — золото (точечные акценты, числа метрик). */
+  --navy: 204 85% 32%;
+  --navy-deep: 207 90% 22%;
+  --azure: 199 90% 36%;
+  --azure-deep: 200 92% 28%;
+  --azure-soft: 203 100% 93%;
   --amber: 43 78% 53%;
   --amber-soft: 45 76% 93%;
 
@@ -176,49 +176,15 @@
     line-height: 1;
   }
 
-  /* Пункт навигации — мягкая «таблетка»: активный заливается тёмно-зелёным,
-     счётчик внутри — золотой. Никаких углов и подчёркиваний. */
-  .nav-link {
-    margin: 0.45rem 0;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-control);
-    font-size: 14.5px;
-    font-weight: 600;
-    color: hsl(var(--ink-soft));
-    white-space: nowrap;
-    transition: background-color 0.18s ease, color 0.18s ease;
-  }
-
-  .nav-link:hover {
-    background: hsl(var(--azure-soft));
-    color: hsl(var(--ink));
-  }
-
-  .nav-link[aria-current='true'] {
-    background: hsl(var(--navy));
-    color: hsl(var(--card));
-  }
-
-  .nav-link[aria-current='true'] .nav-count {
-    color: hsl(var(--amber));
-  }
+  /* Строка навигации под шапкой удалена: разделы открывает боковое меню
+     (кружок-капля, компонент MenuOrb). */
 }
 
 @layer utilities {
-  /* Горизонтальная лента навигации без ползунка — как на узловых порталах. */
-  .no-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
   /* --- Боковое меню-кружок --- */
 
   /* Кружок: круглая плавающая кнопка с мягкой тенью. В основной теме —
-     тёмно-зелёный круг с золотой шестерёнкой, в тёмной — белый на чёрном. */
+     голубой круг с золотой шестерёнкой, в тёмной — белый с тёмным значком. */
   .orb {
     display: grid;
     place-items: center;
@@ -240,9 +206,10 @@
     box-shadow: 0 14px 34px hsl(var(--navy) / 0.42);
   }
 
+  /* Тёмная тема: кружок белый — «капля» светится на чёрном фоне. */
   .dark .orb {
-    background: hsl(var(--card));
-    color: hsl(var(--ink));
+    background: hsl(0 0% 100%);
+    color: hsl(0 0% 8%);
     box-shadow: 0 10px 28px hsl(0 0% 0% / 0.65);
   }
 
@@ -267,4 +234,36 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* --- Тёмная тема: капля-меню белая ---
+   Эти правила намеренно вне слоёв, чтобы перекрывать утилиты Tailwind
+   (bg-card, text-ink-soft и т.п.): панель становится белой, а текст — тёмным,
+   цвет переключается тем же классом .dark, что и вся тема. */
+.dark .menu-drop {
+  background: hsl(0 0% 100%);
+  border-color: hsl(0 0% 88%);
+  color: hsl(0 0% 10%);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.55);
+}
+
+.dark .menu-drop .caption {
+  color: hsl(0 0% 45%);
+}
+
+.dark .menu-drop .text-ink-soft {
+  color: hsl(0 0% 42%);
+}
+
+.dark .menu-drop .hover\:text-ink {
+  color: hsl(0 0% 42%);
+}
+
+.dark .menu-drop .hover\:text-ink:hover {
+  color: hsl(0 0% 10%);
+}
+
+.dark .menu-drop .menu-item:hover {
+  background: hsl(203 100% 93%);
+  color: hsl(0 0% 10%);
 }

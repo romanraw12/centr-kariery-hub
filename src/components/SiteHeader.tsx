@@ -1,43 +1,7 @@
-import { useEffect, useState } from 'react'
 import { Moon, PhoneCall, Sun } from 'lucide-react'
-import { NAV, NAV_IDS } from '../nav'
 import { useTheme } from '../theme'
 
-/* Подсветка активного пункта: секция считается активной, когда её заголовок
-   оказался в верхней трети экрана. */
-function useActiveSection() {
-  const [active, setActive] = useState(NAV_IDS[0])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-        if (visible) setActive(visible.target.id)
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
-
-    NAV_IDS.forEach((id) => {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  return active
-}
-
-export function SiteHeader({
-  onCallback,
-  counts,
-}: {
-  onCallback: () => void
-  counts: { vacancies: number; internships: number }
-}) {
-  const active = useActiveSection()
+export function SiteHeader({ onCallback }: { onCallback: () => void }) {
   const { theme, toggle } = useTheme()
 
   return (
@@ -51,21 +15,37 @@ export function SiteHeader({
         </div>
       </div>
 
-      {/* Шапка: бренд, телефоны, обратный звонок. */}
+      {/* Шапка: крупный логотип-медальон, пояснения, телефоны-чипики,
+         мягкие органы управления — без единого острого угла. */}
       <div className="border-b border-line bg-card">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3.5">
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center bg-navy font-display text-lg font-bold text-amber">
-              ЮУ
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-3 px-4 py-3">
+          {/* Бренд: логотип крупным планом в скруглённом медальоне. */}
+          <div className="flex items-center gap-4">
+            <span className="relative grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-card border border-line bg-white shadow-sm sm:h-24 sm:w-24 dark:bg-white/95">
+              {/* Запасная марка — если файл логотипа ещё не положили в public. */}
+              <span className="font-display text-2xl font-bold text-navy select-none" aria-hidden="true">
+                ЦК
+              </span>
+              <img
+                src={`${import.meta.env.BASE_URL}logo.png`}
+                alt="Логотип Центра карьеры"
+                className="absolute inset-0 h-full w-full object-cover"
+                onError={(event) => {
+                  event.currentTarget.style.display = 'none'
+                }}
+              />
             </span>
+
             <div>
-              <p className="font-display text-xl leading-tight">Центр карьеры</p>
+              <p className="font-display text-[1.65rem] leading-tight sm:text-[1.85rem]">Центр карьеры</p>
               <p className="caption uppercase tracking-[0.16em]">Южный университет · ИУБиП</p>
+              <p className="caption mt-0.5 hidden sm:block">Вакансии · стажировки · карьерный трек</p>
             </div>
           </div>
 
-          <div className="ml-auto flex flex-wrap items-center gap-x-7 gap-y-3">
-            <div className="hidden sm:block">
+          {/* Пояснения и действия — в мягких «таблетках». */}
+          <div className="ml-auto flex flex-wrap items-center gap-2.5">
+            <div className="hidden rounded-card border border-line bg-surface px-4 py-2 transition-colors hover:border-azure/60 sm:block">
               <p className="caption">Горячая линия</p>
               <a
                 href="tel:88007755012"
@@ -74,7 +54,7 @@ export function SiteHeader({
                 8 800 77-55-012
               </a>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden rounded-card border border-line bg-surface px-4 py-2 transition-colors hover:border-azure/60 md:block">
               <p className="caption">Приёмная комиссия</p>
               <a
                 href="tel:+78632454565"
@@ -87,14 +67,14 @@ export function SiteHeader({
               type="button"
               onClick={toggle}
               aria-label={theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'}
-              className="grid h-10 w-10 place-items-center border border-line text-ink-soft transition-colors hover:border-azure hover:text-azure"
+              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface text-ink-soft transition-colors hover:border-azure hover:text-azure"
             >
               {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
             <button
               type="button"
               onClick={onCallback}
-              className="inline-flex items-center gap-2 bg-amber px-4 py-2.5 text-sm font-semibold text-navy-deep transition-colors hover:brightness-95"
+              className="inline-flex items-center gap-2 rounded-full bg-amber px-5 py-2.5 text-sm font-semibold text-navy-deep shadow-sm transition-all hover:brightness-95"
             >
               <PhoneCall className="h-4 w-4" />
               Заказать звонок
@@ -102,29 +82,6 @@ export function SiteHeader({
           </div>
         </div>
       </div>
-
-      {/* Липкая навигация: активный пункт — янтарная черта снизу. */}
-      <nav className="border-b border-line bg-card/95 backdrop-blur" aria-label="Разделы сайта">
-        <div className="no-scrollbar mx-auto flex max-w-6xl overflow-x-auto px-4">
-          {NAV.map((item) => {
-            const count = item.id === 'vacancies' ? counts.vacancies : item.id === 'internships' ? counts.internships : 0
-            return (
-              <button
-                key={item.id}
-                type="button"
-                aria-current={active === item.id}
-                onClick={() =>
-                  document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }
-                className="nav-link"
-              >
-                {item.label}
-                {count > 0 && <span className="nav-count ml-1.5 text-amber">{count}</span>}
-              </button>
-            )
-          })}
-        </div>
-      </nav>
     </header>
   )
 }
