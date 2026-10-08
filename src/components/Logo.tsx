@@ -1,4 +1,4 @@
-/* Логотип «WVE» с глобусом — векторный, без внешних файлов и картинок.
+/* Логотип «ИУЭ» с глобусом — векторный, без внешних файлов и картинок.
    Цвет наследуется через currentColor: в шапке обёрнут в text-amber,
    поэтому в основной теме он золотой, в тёмной — белый. */
 export function Logo({ className }: { className?: string }) {
@@ -13,19 +13,23 @@ export function Logo({ className }: { className?: string }) {
         <path d="M186 54a100 83 0 0 1 0 166" />
       </g>
 
-      {/* Монограмма: W и E — курсив, V — длинное остриё вниз. */}
-      <g fill="currentColor" stroke="currentColor" strokeWidth="5" strokeLinejoin="round">
-        <g transform="skewX(-11)">
-          <path d="M102 48h16l19.5 105h-16z" />
-          <path d="M121.5 153h16l19.5-105h-16z" />
-          <path d="M141 48h16l19.5 105h-16z" />
-          <path d="M160.5 153h16l19.5-105h-16z" />
-          <rect x="231" y="48" width="18" height="105" />
-          <rect x="231" y="48" width="58" height="18" />
-          <rect x="231" y="91.5" width="50" height="18" />
-          <rect x="231" y="135" width="58" height="18" />
-        </g>
-        <path d="M156 44h72l-36 208z" />
+      {/* Монограмма ИУЭ: курсивный наклон, У — с длинным хвостом вниз. */}
+      <g transform="skewX(-9)" fill="currentColor" stroke="currentColor" strokeWidth="5" strokeLinejoin="round">
+        {/* И: две вертикали и диагональ снизу-слева вверх-вправо */}
+        <rect x="103" y="48" width="17" height="105" />
+        <rect x="164" y="48" width="17" height="105" />
+        <path d="M147 48h17l-27 105h-17z" />
+        {/* У: чаша-«V» и длинный сужающийся хвост, уходящий за глобус */}
+        <path d="M165 48h22l16 43 16-43h22l-38 102z" />
+        <path d="M196 110h26l8 142z" />
+        {/* Э: дуга с разрезом слева и горизонтальным язычком */}
+        <path
+          d="M229.4 78.4a36 52.5 0 1 1 0 44.3"
+          fill="none"
+          strokeWidth="19"
+          strokeLinecap="round"
+        />
+        <rect x="234" y="91" width="48" height="19" />
       </g>
     </svg>
   )
